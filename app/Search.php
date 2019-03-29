@@ -19,6 +19,18 @@ class Search
         ];
     }
 
+    public function all()
+    {
+        return [
+            'data' => [
+                'gif' => [
+                    'title' => 'Typing',
+                    'url' => '/gifs/typing.gif'
+                ]
+            ]
+        ];
+    }
+
     public function setToken($token)
     {
         $this->token = $token;
