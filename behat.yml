@@ -1,0 +1,5 @@
+default:
+    suites:
+        api:
+            paths: [tests/Api/features]
+            contexts: [App\Tests\Api\ApiFeatureContext]
