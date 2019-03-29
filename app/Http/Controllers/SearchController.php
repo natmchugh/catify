@@ -23,4 +23,10 @@ class SearchController extends Controller
         $search = new Search();
         return response()->json($search->search($term));
     }
+
+    public function random()
+    {
+        $search = new Search();
+        return response()->json($search->random());
+    }
 }

@@ -6,14 +6,34 @@ class Search
 {
     protected $term;
 
+    protected $data = [
+        'typing'  => '/gifs/typing.gif',
+        'glasses' => 'gifs/glasses.gif',
+    ];
+
     public function search($term)
     {
-        $this->term = $term;
+        if (!empty($this->data[$term])) {
+            return [
+                'data' => [
+                    [
+                        'title' => ucfirst($term),
+                        'url' => $this->data[$term]
+                    ]
+                ]
+            ];
+        }
+        abort(404);
+    }
+
+    public function random()
+    {
+        $title = array_rand($this->data);
         return [
             'data' => [
-                'gif' => [
-                    'title' => 'Typing',
-                    'url' => '/gifs/typing.gif'
+                [
+                    'title' => ucfirst($title),
+                    'url' => $this->data[$title]
                 ]
             ]
         ];
@@ -23,16 +43,15 @@ class Search
     {
         return [
             'data' => [
-                'gif' => [
+                [
                     'title' => 'Typing',
                     'url' => '/gifs/typing.gif'
+                ],
+                [
+                    'title' => 'Glasses',
+                    'url' => '/gifs/glasses.gif'
                 ]
             ]
         ];
-    }
-
-    public function setToken($token)
-    {
-        $this->token = $token;
     }
 }
