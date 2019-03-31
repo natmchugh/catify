@@ -11,12 +11,8 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
-$router->group(['prefix' => 'auth'], function () use ($router) {
-  $router->post('register',  ['uses' => 'AuthController@register']);
+$router->get('/', function ()  {
+    return view('docs');
 });
 
 $router->group(['middleware' => 'apikey.auth', 'prefix' => 'api'], function () use ($router) {

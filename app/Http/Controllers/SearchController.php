@@ -7,26 +7,23 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function showAllGifs()
+    public function showAllGifs(Search $search)
     {
-        $search = new Search();
-        return response()->json($search->all());
+        $gifs = $search->all();
+        return response()->json($gifs);
     }
 
-    public function showBestMatch($term)
+    public function showBestMatch(Search $search, $term)
     {
-        $search = new Search();
-        return response()->json($search->search($term));
+        $gifs = $search->search($term);
+        if ($gifs) {
+            return response()->json($gifs);
+        }
+        abort(404);
     }
 
-    public function random()
+    public function random(Search $search)
     {
-        $search = new Search();
         return response()->json($search->random());
     }
 }

@@ -2,56 +2,56 @@
 
 namespace App;
 
+use Symfony\Component\Yaml\Yaml;
+use Illuminate\Support\Facades\Storage;
+
 class Search
 {
     protected $term;
 
-    protected $data = [
-        'typing'  => '/gifs/typing.gif',
-        'glasses' => 'gifs/glasses.gif',
-    ];
+    protected $data;
+
+    public function __construct()
+    {
+        $filename = 'gifs.yml';
+        $path = Storage::disk('public')->path($filename);
+        $this->data = Yaml::parse(file_get_contents($path));
+    }
 
     public function search($term)
     {
-        if (!empty($this->data[$term])) {
-            return [
-                'data' => [
-                    [
-                        'title' => ucfirst($term),
-                        'url' => $this->data[$term]
+        foreach ($this->data as $title => $gif) {
+            if (in_array($term, $gif['tags'])) {
+                return [
+                    'data' => [
+                        [
+                            'title' => $title,
+                            'url' => $gif['url']
+                        ]
                     ]
-                ]
-            ];
+                ];
+
+            }
         }
-        abort(404);
     }
 
     public function random()
     {
         $title = array_rand($this->data);
+        $gif = $this->data[$title];
         return [
-            'data' => [
-                [
-                    'title' => ucfirst($title),
-                    'url' => $this->data[$title]
-                ]
-            ]
+            'data' => [['title' => $title, 'url' => $gif['url']]]
         ];
     }
 
     public function all()
     {
+        $gifs = [];
+        foreach ($this->data as $title => $gif) {
+            $gifs[] = ['title' => $title, 'url' => $gif['url']];
+        }
         return [
-            'data' => [
-                [
-                    'title' => 'Typing',
-                    'url' => '/gifs/typing.gif'
-                ],
-                [
-                    'title' => 'Glasses',
-                    'url' => '/gifs/glasses.gif'
-                ]
-            ]
+            'data' => $gifs
         ];
     }
 }

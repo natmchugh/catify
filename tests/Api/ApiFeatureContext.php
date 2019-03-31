@@ -90,10 +90,9 @@ class ApiFeatureContext extends LumenFeatureContext
      */
     public function iShouldGetAGifWithATitleAndUrl()
     {
-        $data = json_decode($this->response->getBody())->data;
-        $firstGif = current($data);
-        PHPUnit::assertObjectHasAttribute('title', $firstGif);
-        PHPUnit::assertObjectHasAttribute('url', $firstGif);
+        $gif = json_decode($this->response->getBody())->data;
+        PHPUnit::assertObjectHasAttribute('title', $gif);
+        PHPUnit::assertObjectHasAttribute('url', $gif);
     }
 
     /**
