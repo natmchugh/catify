@@ -19,7 +19,22 @@ var syntaxHighlight = function(json) {
         return '<span class="' + cls + '">' + match + '</span>';
     });
 }
-var requestApi = function(token, path_name)
+var appendImage = function(section_name, url, img_title)
+{
+    var img=document.createElement("img");
+    img.src  =url;
+    img.id = img_title;
+    var gifs = document.getElementById(section_name+'.gifs');
+    gifs.appendChild(img);
+}
+var clearImages = function(section_name)
+{
+  var gifs = document.getElementById(section_name+'.gifs');
+  while (gifs.firstChild) {
+    gifs.removeChild(gifs.firstChild);
+  }
+}
+var requestApi = function(token, path_name, section_name)
 {
   var base_url = window.location.origin;
   var url = base_url+path_name;
@@ -30,8 +45,14 @@ var requestApi = function(token, path_name)
     if (xhr.readyState === 4) {
         var json = JSON.parse(this.responseText);
         var jsonstr = syntaxHighlight(json);
-        document.getElementById("jsonResponse").innerHTML = jsonstr;
-        document.getElementById("gif").src = json.data[0].url;
+        document.getElementById(section_name+".jsonResponse").innerHTML = jsonstr;
+        var index;
+        var gif;
+        clearImages(section_name);
+        for (index = 0; index < json.data.length; ++index) {
+            gif = json.data[index];
+            appendImage(section_name, gif.url, gif.title);
+        }
         }
     };
     xhr.onerror = function(e) {
@@ -43,13 +64,13 @@ var doRandom = function()
 {
   var token = document.getElementById('random.API-TOKEN').value;
   var url = '/api/random';
-  requestApi(token, url);
+  requestApi(token, url, 'random');
   return false;
 }
 var doSearch = function() {
   var term = document.getElementById('search.search').value;
   var token = document.getElementById('search.API-TOKEN').value;
   var api_path = '/api/search/'+term;
-  requestApi(token, api_path);
+  requestApi(token, api_path, 'search');
   return false;
 }
