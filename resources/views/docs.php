@@ -55,7 +55,7 @@
                     </tr>
                 </tbody>
             </table>
-            <input type="button" name="submit" value="Try It!" onclick="doSearch();"/>
+            <input class="button-primary" type="button" name="submit" value="Try It!" onclick="doSearch();"/>
             <h4>Request</h4>
              <pre>
                 <code>
@@ -105,7 +105,7 @@
                     </tr>
                 </tbody>
             </table>
-            <input type="button" name="submit" value="Try It!" onclick="doRandom();"/>
+            <input class="button-primary" type="button" name="submit" value="Try It!" onclick="doRandom();"/>
             <h4>Request</h4>
              <pre>
                 <code>
