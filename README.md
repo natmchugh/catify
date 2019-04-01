@@ -16,8 +16,13 @@ The application is provided with a complete docker set up containing two docker 
 
     cd catify
     cp .env.example .env
-    composer install
     docker-compose up -d
+    composer install
+    
+Copy some example data into the application
+
+     cp gifs.yml storage/app/public/
+
 
 The appication should then be available to view at 
 
