@@ -7,21 +7,24 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function showAllGifs(Search $search)
-    {
-        $gifs = $search->all();
-        return response()->json($gifs);
-    }
-
-    public function showBestMatch(Search $search, $term)
+    /**
+     * @param Search $search
+     * @param $term
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search(Search $search, $term = null)
     {
         $gifs = $search->search($term);
-        if ($gifs) {
+        if (count($gifs['data'])> 0) {
             return response()->json($gifs);
         }
         abort(404);
     }
 
+    /**
+     * @param Search $search
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function random(Search $search)
     {
         return response()->json($search->random());

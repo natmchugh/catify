@@ -57,12 +57,4 @@ class Search
             'data' => $gifs
         ];
     }
-
-    /**
-     * @return array
-     */
-    public function all()
-    {
-       return $this->search();
-    }
 }

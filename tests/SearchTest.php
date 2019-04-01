@@ -8,7 +8,7 @@ class SearchTest extends TestCase
     public function testWildcardSearch()
     {
         $search = new Search();
-        $results = $search->all();
+        $results = $search->search();
         $this->assertTrue(count($results['data']) > 0);
     }
 

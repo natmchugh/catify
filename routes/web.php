@@ -16,9 +16,7 @@ $router->get('/', function ()  {
 });
 
 $router->group(['middleware' => 'apikey.auth', 'prefix' => 'api'], function () use ($router) {
-  $router->get('search',  ['uses' => 'SearchController@showAllGifs']);
-
-  $router->get('search/{term}', ['uses' => 'SearchController@showBestMatch']);
+  $router->get('search[/{term}]', ['uses' => 'SearchController@search']);
 
   $router->get('random',  ['uses' => 'SearchController@random']);
 
