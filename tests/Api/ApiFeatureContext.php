@@ -16,7 +16,7 @@ class ApiFeatureContext extends LumenFeatureContext
 
     protected $headers =[];
 
-    protected $base_uri = 'http://127.0.0.1/api/';
+    protected $base_uri = 'http://localhost/api/';
 
     /**
      * @Given I want to search gifs

@@ -46,6 +46,7 @@ var requestApi = function(token, path_name, section_name)
         var json = JSON.parse(this.responseText);
         var jsonstr = syntaxHighlight(json);
         document.getElementById(section_name+".jsonResponse").innerHTML = jsonstr;
+        document.getElementById(section_name+".requestUrl").innerHTML = url;
         var index;
         var gif;
         clearImages(section_name);
