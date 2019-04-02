@@ -10,7 +10,7 @@ The application is provided with a complete docker set up containing two docker 
 * [docker](https://docs.docker.com/install/)
 * [docker compose](https://docs.docker.com/compose/install/)
 * [composer](https://getcomposer.org/download/)
-* That port 80 is unused on your envirnement by another service
+* That port 80 is unused on your environment by another service
 
 ### Starting the environment
 
